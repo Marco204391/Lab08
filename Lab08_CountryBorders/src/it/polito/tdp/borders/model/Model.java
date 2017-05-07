@@ -32,7 +32,7 @@ public class Model {
 			result+= c+"  numero di confini:"+graph.degreeOf(c)+"\n";
 		}
 		result+= "\n\nComponenti connesse : "+ numeroComponentiConnesse();
-		result+= "\n\nNUMERO  DEI PAESI  NELLA MASSIMA COMPONENTE CONNESSA: "+ numeroMassimoConnessioni();
+		result+= "\n\nNumero dei paesi nella massima componente: "+ numeroMassimoConnessioni();
 		return result;
 
 	}

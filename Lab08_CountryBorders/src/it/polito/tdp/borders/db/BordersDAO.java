@@ -55,18 +55,7 @@ public class BordersDAO {
 			ResultSet rs = st.executeQuery();
 
 			while (rs.next()) {
-
-
-
 				archi.add(new Border(rs.getInt("state1no"), rs.getInt("state2no"), rs.getString("state1ab"), rs.getString("state2ab"), rs.getInt("year")));
-//				Country tmp1 = new Country(rs.getString("State1ab"));
-//				Country tmp2 = new Country(rs.getString("State2ab"));
-//				
-//				Border c= new Border(tmp1,tmp2);
-//				//String c1 =rs.getString("State1ab");
-//				//String c2 =rs.getString("State2ab");
-//				archi.add(c);
-				
 			}
 			
 			conn.close();

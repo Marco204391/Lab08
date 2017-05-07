@@ -12,11 +12,11 @@ public class TestDAO {
 		BordersDAO dao = new BordersDAO();
 
 		System.out.println("Lista di tutte le nazioni:");
-		List<Country> countries = dao.loadAllCountries();
+		//List<Country> countries = dao.loadAllCountries();
 
-		System.out.println("Lista di tutti i confini");
-		for(Border c : dao.getCountryPairs(2000)){
-			System.out.format(" %s %s \n", c.getC1(), c.getC2());
-		}
+//		System.out.println("Lista di tutti i confini");
+//		for(Border c : dao.getCountryPairs(2000)){
+//			System.out.format(" %s %s \n", c.getC1(), c.getC2());
+//		}
 	}
 }

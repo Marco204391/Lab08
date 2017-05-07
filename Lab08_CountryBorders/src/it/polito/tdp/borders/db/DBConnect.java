@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 public class DBConnect {
 
-	static private final String jdbcUrl = "jdbc:mysql://localhost/countries?user=root";
+	static private final String jdbcUrl = "jdbc:mysql://localhost/countries?user=root&password=root";
 	static private DBConnect instance = null;
 
 	private DBConnect() {
@@ -24,7 +24,7 @@ public class DBConnect {
 
 	public Connection getConnection() {
 		try {
-
+			
 			Connection conn = DriverManager.getConnection(jdbcUrl);
 			return conn;
 

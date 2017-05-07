@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import it.polito.tdp.borders.model.Border;
@@ -13,6 +14,8 @@ import it.polito.tdp.borders.model.Country;
 public class BordersDAO {
 
 	public List<Country> loadAllCountries() {
+
+		List<Country> vertici = new ArrayList<Country>();
 
 		String sql = "SELECT ccode,StateAbb,StateNme " + "FROM country " + "ORDER BY StateAbb ";
 
@@ -23,11 +26,13 @@ public class BordersDAO {
 			ResultSet rs = st.executeQuery();
 
 			while (rs.next()) {
-				System.out.format("%d %s %s\n", rs.getInt("ccode"), rs.getString("StateAbb"), rs.getString("StateNme"));
+				Country c = new Country( rs.getString("StateAbb"));
+				vertici.add(c);
+				//System.out.format("%d %s %s\n", rs.getInt("ccode"), rs.getString("StateAbb"), rs.getString("StateNme"));
 			}
 
 			conn.close();
-			return new ArrayList<Country>();
+			return vertici;
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -35,10 +40,38 @@ public class BordersDAO {
 			throw new RuntimeException("Database Error");
 		}
 	}
+	
 
 	public List<Border> getCountryPairs(int anno) {
 
-		System.out.println("TODO -- BordersDAO -- getCountryPairs(int anno)");
-		return new ArrayList<Border>();
+		List<Border> archi = new ArrayList<Border>();
+		final String sql = "SELECT State1ab, State2ab " + "FROM contiguity " + "WHERE year<=? AND conttype=1 ";
+		
+		try {
+			Connection conn = DBConnect.getInstance().getConnection();
+			PreparedStatement st = conn.prepareStatement(sql);
+
+			st.setInt(1, anno);
+			ResultSet rs = st.executeQuery();
+
+			while (rs.next()) {
+
+				Country tmp1 = new Country(rs.getString("State1ab"));
+				Country tmp2 = new Country(rs.getString("State2ab"));
+				Border c= new Border(tmp1,tmp2);
+				//String c1 =rs.getString("State1ab");
+				//String c2 =rs.getString("State2ab");
+				archi.add(c);
+				
+			}
+			conn.close();
+			return archi;
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+			
 	}
 }
